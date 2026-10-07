@@ -1,24 +1,33 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-import router from "./routes/auth.routes.js"; 
+import db from './config/database.js'
+
+import authRouter from "./routes/authRoute.js";
 
 dotenv.config();
 
 const app = express();
+const PORT = 3000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin:"http://localhost:5173"
+}));
 app.use(express.json());
-app.use(router());
+app.use("/api/auth",authRouter());
 
-// Test route
-app.get("/", (req, res) => {
-  res.json({message: "Backend Harafina berhasil berjalan"});
-});
+async function startServer(){
+  try{
+    await db.authenticate();
+    await db.sync();
+    
+    app.listen(PORT, () => {
+      console.log(`Server berjalan di http://localhost:${PORT}`);
+    });
+  }catch(error){
+    console.error("Gagal menjalankan server, periksa : ",error);
+  }
+}
 
-const PORT = process.env.PORT || 3000;
+startServer();
 
-app.listen(PORT, () => {
-  console.log(`Server berjalan di http://localhost:${PORT}`);
-});
