@@ -85,7 +85,7 @@ export async function login(req, res){
     }
 };
 
-export const getMe = async(req,res) =>{
+export async function getMe(req,res){
     try{
         const emailDb = await User.findByPk(req.user.id_user,{ attributes:["id_user","nama_user","email"] });
 
