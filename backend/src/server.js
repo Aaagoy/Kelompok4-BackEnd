@@ -5,6 +5,7 @@ import db from "./config/database.js";
 import router from "./routes/productRoutes.js";
 import authRouter from "./routes/authRoutes.js";
 import kategoriRouter from "./routes/kategoriRoute.js";
+import orderRouter from "./routes/orderRoute.js";
 
 // dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use("/api/auth/login", authRouter);
 app.use("/api/produk", router);
 app.use("/api/kategori", kategoriRouter);
+app.use("/api/order", orderRouter);
 
 const startServer = async () => {
   try {

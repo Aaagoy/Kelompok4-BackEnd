@@ -1,8 +1,9 @@
 import express from "express";
-import { login } from "../controllers/authController.js";
+import { getMe, login } from "../controllers/authController.js";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 
-function authRouter() {
-  return express.Router().post("/api/auth/login", login);
-}
+const authRouter = express.Router();
+authRouter.get("/", login);
+authRouter.get("/me", authMiddleware, getMe);
 
 export default authRouter;
