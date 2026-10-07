@@ -1,24 +1,38 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
+import db from "./config/database.js";
 import router from "./routes/productRoutes.js";
+import authRouter from "./routes/authRoutes.js";
+import kategoriRouter from "./routes/kategoriRoute.js";
 
-dotenv.config();
+// dotenv.config();
 
 const app = express();
+const PORT = 3000;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(router());
-
-// Test route
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  }),
+);
 app.get("/", (req, res) => {
-  res.json({ message: "Backend Harafina berhasil berjalan" });
+  res.send("Selamat datang di API Harafina!");
 });
+app.use(express.json());
+app.use("/api/auth/login", authRouter);
+app.use("/api/produk", router);
+app.use("/api/kategori", kategoriRouter);
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server berjalan di http://localhost:${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await db.authenticate();
+    await db.sync();
+    app.listen(PORT, () => {
+      console.log(`Server running at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Gagal menjalankan server:", error);
+  }
+};
+startServer();

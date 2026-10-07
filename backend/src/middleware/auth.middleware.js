@@ -1,36 +1,27 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = "belajar-react-jwt-rahasia";
 
-export const verifyToken = (req, res, next) => {
-    try {
-        const authHeader = req.headers.authorization;
+const authMiddleware = (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-        if (!authHeader) {
-            return res.status(401).json({
-                Notifikasi: "Token tidak ditemukan"
-            });
-        }
+  if (!authHeader || !authHeader.startsWith("Bearer")) {
+    return res.status(401).json({
+      message: "Token tidak tersedia",
+    });
+  }
 
-        const token = authHeader.split(" ")[1];
+  const token = authHeader.split(" ")[1];
 
-        if (!token) {
-            return res.status(401).json({
-                Notifikasi: "Token tidak ditemukan"
-            });
-        }
-
-        const decoded = jwt.verify(token, JWT_SECRET);
-
-        req.user = decoded;
-
-        next();
-
-    } catch (error) {
-        console.error("JWT verification error:", error);
-
-        return res.status(401).json({
-            Notifikasi: "Token tidak valid atau sudah kadaluarsa"
-        });
-    }
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      message: "Token tidak valid atau sudah kadaluarsa",
+    });
+  }
 };
+
+export default authMiddleware;

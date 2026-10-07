@@ -4,10 +4,10 @@ import User from "../models/User.js";
 
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
     // Cek input
-    if (!email || !password) {
+    if (!email || !password || !role) {
       return res.status(400).json({
         Notifikasi: "Mohon lengkapi Email dan Password!",
       });
