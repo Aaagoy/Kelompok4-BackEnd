@@ -16,6 +16,7 @@ const Kategori = db.define(
   },
   {
     freezeTableName: true,
+    timestamps: false, // jika tidak ada kolom createdAt dan updatedAt
   },
 );
 
