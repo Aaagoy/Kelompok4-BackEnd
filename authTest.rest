@@ -1,0 +1,43 @@
+### REGISTER
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "nama_user": "Admin",
+    "email" : "admin@example.com",
+    "password": "admin123",
+    "role": "admin"
+}
+
+### UPDATE
+PATCH http://localhost:3000/api/auth/account
+Content-Type: application/json
+
+{
+    "idUser" : 4,
+    "nama_user": "admin123",
+    "email" : "noval@example.com",
+    "password": "admin321",
+    "role": "owner"
+}
+
+### DELETE
+DELETE http://localhost:3000/api/auth/account
+Content-Type: application/json
+
+{
+    "idUser" : 4
+}
+
+### Login
+POST http://localhost:3000/api/auth
+Content-Type: application/json
+
+{
+    "email": "admin@example.com",
+    "password": "admin123"
+}
+
+### PROFILE AND TOKEN TEST IF LOGIN SUCCES IS ACTIVE
+GET http://localhost:3000/api/auth/me
+Authorization: Bearer SECRET_KEY_AUTHORIZE_HERE
