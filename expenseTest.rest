@@ -1,0 +1,17 @@
+### ADD
+POST http://localhost:3000/api/expense
+Content-Type: application/json
+
+{
+  "tanggal": "2026-10-08",
+  "keterangan": "Minyak Goreng Barco",
+  "jumlah": 75000
+}
+### GET ALL DATA
+GET http://localhost:3000/api/expense
+
+### GET DATA BY ID 
+GET http://localhost:3000/api/expense/1
+
+### DELETE DATA BY ID
+DELETE http://localhost:3000/api/expense/3
