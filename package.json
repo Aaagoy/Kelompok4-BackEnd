@@ -12,10 +12,7 @@
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
-<<<<<<< HEAD
-=======
     "dotenv": "^18.0.6",
->>>>>>> 5d1226b205d96e6ba0f93db78f39397f6eb8cec2
     "express": "^5.2.1",
     "firebase-admin": "^14.5.0",
     "jsonwebtoken": "^9.0.3",
