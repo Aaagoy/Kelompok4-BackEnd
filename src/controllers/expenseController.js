@@ -29,17 +29,34 @@ export const getExpenseById = async (req, res) => {
 // POST tambah pengeluaran
 export const createExpense = async (req, res) => {
   try {
-    const { tanggal, keterangan, jumlah } = req.body;
+    const { nm_brg, nm_supp, jml, hrg, stn, tgl } = req.body;
+    const convertJml = Number(jml);
+    const convertHrg = Number(hrg);
 
-    if (!tanggal || !keterangan || !jumlah) {
-      return res.status(400).json({Notifikasi: "Tanggal, keterangan, dan jumlah wajib diisi"});
+    if (!nm_brg || !nm_supp || 
+      jml==null || jml===""||
+      hrg==null || hrg===""||
+      !stn || !tgl) {
+      return res.status(400).json({Notifikasi: "Pastikan semua field wajib diisi !"});
+    }
+    if(!Number.isInteger(convertHrg)||!Number.isInteger(convertHrg)){
+      return res.status(400).json({Notifikasi: "Pastikan harga dan jumlah berupa angka !"})
     }
 
-    await Expense.create({tanggal, keterangan, jumlah});
+    const t_pengeluaran = convertJml * convertHrg;
 
-    res.status(201).json({Notifikasi: "Pengeluaran berhasil ditambah",});
+    await Expense.create({
+      nama_barang: nm_brg, 
+      nama_supplier : nm_supp,
+      jumlah : convertJml, 
+      harga : convertHrg,
+      satuan: stn, 
+      total_pengeluaran : t_pengeluaran,
+      tanggal:tgl});
+
+    res.status(200).json({Notifikasi: "Pengeluaran berhasil ditambah",});
   } catch (error) {
-    res.status(500).json({Notifikasi: "Gagal menambahkan pengeluaran, periksa"},error);
+    res.status(500).json({Notifikasi: "Gagal menambahkan pengeluaran, periksa", error:error.message});
   }
 };
 
