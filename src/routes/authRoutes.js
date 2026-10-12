@@ -3,6 +3,7 @@ import {
   createAccount,
   deleteAccount,
   getMe,
+  getUsers,
   login,
   loginAdmin,
   updateAccount,
@@ -11,10 +12,11 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const authRouter = express.Router();
 authRouter.post("/", login);
-authRouter.post("/admin/login", loginAdmin);
+authRouter.post("/", loginAdmin);
 authRouter.post("/register", createAccount);
 authRouter.patch("/account", updateAccount);
 authRouter.delete("/account", deleteAccount);
 authRouter.get("/me", authMiddleware, getMe);
+authRouter.get("/", getUsers);
 
 export default authRouter;

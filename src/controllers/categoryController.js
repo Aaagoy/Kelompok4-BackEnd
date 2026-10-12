@@ -4,9 +4,10 @@ import Kategori from "../models/categoryModel.js";
 export const getKategori = async (req, res) => {
   try {
     const response = await Kategori.findAll();
-    res.status(200).json(response);
+    return res.status(200).json(response);
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
+    return res.status(500).json({ msg: error.message });
   }
 };
 
@@ -17,18 +18,25 @@ export const getKategoriById = async (req, res) => {
         id_kategori: req.params.id,
       },
     });
-    res.status(200).json(response);
+    if (!response) {
+      return res.status(404).json({ msg: "Kategori tidak ditemukan" });
+    }
+    return res.status(200).json(response);
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
+    return res.status(500).json({ msg: err.message });
   }
 };
 
 export const createKategori = async (req, res) => {
   try {
     await Kategori.create(req.body);
-    res.status(201).json({ msg: "Kategori berhasil ditambah" });
+    return res.status(201).json({ msg: "Kategori berhasil ditambah" });
   } catch (err) {
-    console.log(err.msg);
+    console.error(err);
+    return res
+      .status(400)
+      .json({ msg: err.message || "Gagal menambah kategori" });
   }
 };
 
@@ -39,9 +47,12 @@ export const updateKategori = async (req, res) => {
         id_kategori: req.params.id,
       },
     });
-    res.status(200).json({ msg: "Kategori berhasil diedit" });
+    return res.status(200).json({ msg: "Kategori berhasil diedit" });
   } catch (err) {
-    console.log(err.msg);
+    console.error(err);
+    return res
+      .status(400)
+      .json({ msg: err.message || "Gagal mengedit kategori" });
   }
 };
 
@@ -49,11 +60,15 @@ export const deleteKategori = async (req, res) => {
   try {
     await Kategori.destroy({
       where: {
-        id_Kategori: req.params.id,
+        // PERBAIKAN: Mengubah id_Kategori (K besar) menjadi id_kategori (k kecil)
+        id_kategori: req.params.id,
       },
     });
-    res.status(200).json({ msg: "Kategori berhasil dihapus" });
+    return res.status(200).json({ msg: "Kategori berhasil dihapus" });
   } catch (err) {
-    console.log(err.msg);
+    console.error(err);
+    return res
+      .status(400)
+      .json({ msg: err.message || "Gagal menghapus kategori" });
   }
 };

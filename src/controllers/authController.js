@@ -4,6 +4,16 @@ import User from "../models/User.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+export const getUsers = async (req, res) => {
+  try {
+    const response = await User.findAll();
+    return res.status(200).json(response);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ msg: error.message });
+  }
+};
+
 export async function createAccount(req, res) {
   let { nama_user, email, password, role } = req.body;
 

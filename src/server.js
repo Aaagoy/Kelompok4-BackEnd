@@ -9,8 +9,7 @@ import router from "./routes/productRoutes.js";
 import orderRouter from "./routes/orderRoute.js";
 import expenseRouter from "./routes/expenseRoute.js";
 import rptRoute from "./routes/rptIORoute.js";
-import { login } from "./controllers/authController.js";
-import { loginAdmin } from "./controllers/authController.js";
+import { getUsers, loginAdmin } from "./controllers/authController.js";
 
 const app = express();
 const PORT = 3000;
@@ -25,13 +24,13 @@ app.get("/", (req, res) => {
 });
 app.use(express.json());
 app.use("/api/auth", authRouter);
-app.use("/", login);
+app.use("/users", getUsers);
 app.use("/produk", router);
 app.use("/kategori", kategoriRouter);
 app.use("/order", orderRouter);
 app.use("/expense", expenseRouter());
 app.use("/report", rptRoute());
-app.use("/", loginAdmin);
+app.use("/admin/login", loginAdmin);
 
 const startServer = async () => {
   try {
