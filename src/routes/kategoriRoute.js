@@ -8,10 +8,10 @@ import {
 } from "../controllers/categoryController.js";
 
 const kategoriRouter = express.Router();
-kategoriRouter.get("/kategori", getKategori);
-kategoriRouter.get("/kategori/:id", getKategoriById);
-kategoriRouter.post("/kategori", createKategori);
-kategoriRouter.put("/kategori/:id", updateKategori);
-kategoriRouter.delete("/kategori/:id", deleteKategori);
+kategoriRouter.get("/", getKategori);
+kategoriRouter.get("/:id", getKategoriById);
+kategoriRouter.post("/", createKategori);
+kategoriRouter.put("/:id", updateKategori);
+kategoriRouter.delete("/:id", deleteKategori);
 
 export default kategoriRouter;

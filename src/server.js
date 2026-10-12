@@ -26,12 +26,11 @@ app.get("/", (req, res) => {
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/", login);
-app.use("/api/produk", router);
-app.use("/api/kategori", kategoriRouter);
-app.use("/api/order", orderRouter);
-app.use("/api/expense", expenseRouter());
-app.use("/api/report", rptRoute());
-app.use("/api/expense", expenseRouter);
+app.use("/produk", router);
+app.use("/kategori", kategoriRouter);
+app.use("/order", orderRouter);
+app.use("/expense", expenseRouter());
+app.use("/report", rptRoute());
 app.use("/", loginAdmin);
 
 const startServer = async () => {

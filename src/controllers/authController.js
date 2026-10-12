@@ -75,7 +75,7 @@ export async function deleteAccount(req, res) {
 }
 
 export async function login(req, res) {
-  const { email, password } = req.body;
+  const { email, password } = req.body || {};
   try {
     if (!email || !password) {
       return res
