@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:3000/produk
+method: GET
+order: 1791272016526

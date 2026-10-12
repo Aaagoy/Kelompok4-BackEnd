@@ -8,14 +8,18 @@ import kategoriRouter from "./routes/kategoriRoute.js";
 import router from "./routes/productRoutes.js";
 import orderRouter from "./routes/orderRoute.js";
 import expenseRouter from "./routes/expenseRoute.js";
+<<<<<<< HEAD
 import rptRoute from "./routes/rptIORoute.js";
 import { login } from "./controllers/authController.js";
+=======
+// import { loginAdmin } from "./controllers/authController.js";
+>>>>>>> fbd394f91db98afce45a34dfc12bcb0314af2821
 
 const app = express();
 const PORT = 3000;
 
-app.use(cors(
-  {
+app.use(
+  cors({
     origin: "http://localhost:5173",
   }),
 );
@@ -28,8 +32,13 @@ app.use("/", login);
 app.use("/api/produk", router);
 app.use("/api/kategori", kategoriRouter);
 app.use("/api/order", orderRouter);
+<<<<<<< HEAD
 app.use("/api/expense", expenseRouter());
 app.use("/api/report", rptRoute());
+=======
+app.use("/api/expense", expenseRouter);
+// app.use("/", loginAdmin);
+>>>>>>> fbd394f91db98afce45a34dfc12bcb0314af2821
 
 const startServer = async () => {
   try {
