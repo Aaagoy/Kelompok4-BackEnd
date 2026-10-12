@@ -117,49 +117,49 @@ export async function login(req, res) {
       .json({ Notifikasi: "Terjadi kesalahan pada server" });
   }
 }
-// export async function loginAdmin(req, res) {
-//   const { email, password } = req.body;
-//   try {
-//     if (!email || !password) {
-//       return res
-//         .status(400)
-//         .json({ Notifikasi: "Email dan Password tidak boleh kosong !" });
-//     }
+export async function loginAdmin(req, res) {
+  const { email, password } = req.body;
+  try {
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ Notifikasi: "Email dan Password tidak boleh kosong !" });
+    }
 
-//     const emailDb = await User.findOne({ where: { email } });
-//     if (!emailDb) {
-//       return res
-//         .status(400)
-//         .json({ Notifikasi: "Email dan Password tidak terdaftar" });
-//     }
+    const emailDb = await User.findOne({ where: { email } });
+    if (!emailDb) {
+      return res
+        .status(400)
+        .json({ Notifikasi: "Email dan Password tidak terdaftar" });
+    }
 
-//     const passwordMatch = await bcrypt.compare(password, emailDb.password);
-//     if (!passwordMatch) {
-//       return res.status(401).json({ Notifikasi: "Password anda salah!" });
-//     }
+    const passwordMatch = await bcrypt.compare(password, emailDb.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ Notifikasi: "Password anda salah!" });
+    }
 
-//     const token = jwt.sign(
-//       { id_user: emailDb.id_user, email: emailDb.email },
-//       JWT_SECRET,
-//       { expiresIn: "1d" },
-//     );
-//     return res.status(200).json({
-//       Notifikasi: "Login berhasil",
-//       token: token,
-//       user: {
-//         "ID User": emailDb.id_user,
-//         "Nama User": emailDb.nama_user,
-//         Email: emailDb.email,
-//         Role: emailDb.role,
-//       },
-//     });
-//   } catch (error) {
-//     console.error("Login error, periksa ", error);
-//     return res
-//       .status(500)
-//       .json({ Notifikasi: "Terjadi kesalahan pada server" });
-//   }
-// }
+    const token = jwt.sign(
+      { id_user: emailDb.id_user, email: emailDb.email },
+      JWT_SECRET,
+      { expiresIn: "1d" },
+    );
+    return res.status(200).json({
+      Notifikasi: "Login berhasil",
+      token: token,
+      user: {
+        "ID User": emailDb.id_user,
+        "Nama User": emailDb.nama_user,
+        Email: emailDb.email,
+        Role: emailDb.role,
+      },
+    });
+  } catch (error) {
+    console.error("Login error, periksa ", error);
+    return res
+      .status(500)
+      .json({ Notifikasi: "Terjadi kesalahan pada server" });
+  }
+}
 
 export async function getMe(req, res) {
   try {
