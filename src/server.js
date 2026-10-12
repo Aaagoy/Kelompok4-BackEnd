@@ -8,11 +8,8 @@ import kategoriRouter from "./routes/kategoriRoute.js";
 import router from "./routes/productRoutes.js";
 import orderRouter from "./routes/orderRoute.js";
 import expenseRouter from "./routes/expenseRoute.js";
-<<<<<<< HEAD
-=======
 import rptRoute from "./routes/rptIORoute.js";
 import { login } from "./controllers/authController.js";
->>>>>>> 03264b6d68fb8c9edd8b52f35aec363b057c1797
 import { loginAdmin } from "./controllers/authController.js";
 
 const app = express();
@@ -35,11 +32,7 @@ app.use("/api/order", orderRouter);
 app.use("/api/expense", expenseRouter());
 app.use("/api/report", rptRoute());
 app.use("/api/expense", expenseRouter);
-<<<<<<< HEAD
 app.use("/", loginAdmin);
-=======
- app.use("/", loginAdmin);
->>>>>>> 03264b6d68fb8c9edd8b52f35aec363b057c1797
 
 const startServer = async () => {
   try {

@@ -117,6 +117,7 @@ export async function login(req, res) {
       .json({ Notifikasi: "Terjadi kesalahan pada server" });
   }
 }
+
 export async function loginAdmin(req, res) {
   const { email, password } = req.body;
   try {
