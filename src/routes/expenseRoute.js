@@ -1,13 +1,13 @@
 import express from "express";
 
-import { createExpense, deleteExpense, getExpenseById, getExpenses, updateExpense } from "../controllers/expenseController.js";
+import { createExpense, deleteExpense, getExpenseById, getExpenses } from "../controllers/expenseController.js";
 
-const expenseRouter = express.Router();
-
-expenseRouter.get("/", getExpenses);
-expenseRouter.get("/:id", getExpenseById);
-expenseRouter.post("/", createExpense);
-expenseRouter.patch("/:id", updateExpense);
-expenseRouter.delete("/:id", deleteExpense);
+function expenseRouter (){
+    return express.Router()
+    .get("/", getExpenses)
+    .get("/:id_pengeluaran", getExpenseById)
+    .post("/", createExpense)
+    .delete("/:id_pengeluaran", deleteExpense)
+}
 
 export default expenseRouter;

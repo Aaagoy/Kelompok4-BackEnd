@@ -1,0 +1,14 @@
+### Semua pemasukan dan pengeluaran
+GET http://localhost:3000/api/report
+
+### Laporan berdasarkan rentang tanggal
+GET http://localhost:3000/api/report?dari=2026-10-01&sampai=2026-10-31
+
+### Pemasukan saja
+GET http://localhost:3000/api/report?jenis=pemasukan
+
+### Pengeluaran saja
+GET http://localhost:3000/api/report?jenis=pengeluaran
+
+### Pencarian keterangan
+GET http://localhost:3000/api/report?keterangan=gula

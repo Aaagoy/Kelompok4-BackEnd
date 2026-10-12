@@ -3,19 +3,20 @@ POST http://localhost:3000/api/expense
 Content-Type: application/json
 
 {
-  "nm_brg": "Minyak Goreng Barco",
-  "nm_supp": "Nabati Padang",
-  "jml": 75,
-  "hrg" : 75000,
-  "stn" : "PCS",
-  "tgl": "2026-10-08"
+  "no_ivc": "PO-2026-004",
+  "tgl": "2026-10-10",
+  "nm_supp": "PT. Suzuki Indomobil",
+  "nm_brg": "Suzuki GSX 150R",
+  "jml": 30,
+  "t_expense" : 45000000,
+  "sts" : "Bayar Dimuka"
 }
 
 ### GET DATA BY ID 
 GET http://localhost:3000/api/expense/1
 
 ### DELETE DATA BY ID
-DELETE http://localhost:3000/api/expense/3
+DELETE http://localhost:3000/api/expense/0
 
 ### GET ALL DATA
 GET http://localhost:3000/api/expense
