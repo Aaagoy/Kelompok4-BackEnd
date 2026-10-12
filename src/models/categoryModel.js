@@ -12,6 +12,7 @@ const Kategori = db.define(
       autoIncrement: true,
     },
     nama_kategori: DataTypes.STRING,
+    deskripsi: DataTypes.STRING,
     id_parent: DataTypes.INTEGER,
   },
   {

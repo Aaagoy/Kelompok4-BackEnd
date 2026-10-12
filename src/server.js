@@ -8,7 +8,7 @@ import kategoriRouter from "./routes/kategoriRoute.js";
 import router from "./routes/productRoutes.js";
 import orderRouter from "./routes/orderRoute.js";
 import expenseRouter from "./routes/expenseRoute.js";
-// import { loginAdmin } from "./controllers/authController.js";
+import { loginAdmin } from "./controllers/authController.js";
 
 const app = express();
 const PORT = 3000;
@@ -27,7 +27,7 @@ app.use("/api/produk", router);
 app.use("/api/kategori", kategoriRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/expense", expenseRouter);
-// app.use("/", loginAdmin);
+app.use("/", loginAdmin);
 
 const startServer = async () => {
   try {
