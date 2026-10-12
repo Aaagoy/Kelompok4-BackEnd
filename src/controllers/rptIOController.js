@@ -7,14 +7,8 @@ export const getReport = async (req, res) => {
     const { dari, sampai, jenis, keterangan } = req.query;
 
     // Validasi jenis transaksi
-    if (
-      jenis &&
-      !["pemasukan", "pengeluaran"].includes(jenis)
-    ) {
-      return res.status(400).json({
-        Notifikasi:
-          "Jenis harus pemasukan atau pengeluaran",
-      });
+    if (jenis && !["pemasukan", "pengeluaran"].includes(jenis)) {
+      return res.status(400).json({ Notifikasi: "Jenis harus pemasukan atau pengeluaran" });
     }
 
     // Membuat filter tanggal
@@ -24,9 +18,7 @@ export const getReport = async (req, res) => {
       const startDate = new Date(`${dari}T00:00:00`);
 
       if (Number.isNaN(startDate.getTime())) {
-        return res.status(400).json({
-          Notifikasi: "Format tanggal dari tidak valid",
-        });
+        return res.status(400).json({ Notifikasi: "Format tanggal dari tidak valid" });
       }
 
       dateFilter[Op.gte] = startDate;
@@ -36,9 +28,7 @@ export const getReport = async (req, res) => {
       const endDate = new Date(`${sampai}T23:59:59.999`);
 
       if (Number.isNaN(endDate.getTime())) {
-        return res.status(400).json({
-          Notifikasi: "Format tanggal sampai tidak valid",
-        });
+        return res.status(400).json({ Notifikasi: "Format tanggal sampai tidak valid" });
       }
 
       dateFilter[Op.lte] = endDate;
@@ -60,10 +50,7 @@ export const getReport = async (req, res) => {
         };
       }
 
-      const orders = await Order.findAll({
-        where: whereOrder,
-        order: [["createdAt", "DESC"]],
-      });
+      const orders = await Order.findAll({ where: whereOrder, order: [["createdAt", "DESC"]] });
 
       pemasukan = orders.map((order) => ({
         jenis: "pemasukan",
@@ -104,10 +91,7 @@ export const getReport = async (req, res) => {
         ];
       }
 
-      const expenses = await Expense.findAll({
-        where: whereExpense,
-        order: [["tanggal", "DESC"]],
-      });
+      const expenses = await Expense.findAll({ where: whereExpense, order: [["tanggal", "DESC"]] });
 
       pengeluaran = expenses.map((expense) => ({
         jenis: "pengeluaran",
@@ -119,19 +103,11 @@ export const getReport = async (req, res) => {
     }
 
     // Gabungkan dan urutkan berdasarkan tanggal
-    const data = [...pemasukan, ...pengeluaran].sort(
-      (a, b) => new Date(b.tanggal) - new Date(a.tanggal)
-    );
+    const data = [...pemasukan, ...pengeluaran].sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
 
-    const totalPemasukan = pemasukan.reduce(
-      (total, item) => total + item.nominal,
-      0
-    );
+    const totalPemasukan = pemasukan.reduce((total, item) => total + item.nominal, 0);
 
-    const totalPengeluaran = pengeluaran.reduce(
-      (total, item) => total + item.nominal,
-      0
-    );
+    const totalPengeluaran = pengeluaran.reduce((total, item) => total + item.nominal, 0);
 
     return res.status(200).json({
       Notifikasi: "Laporan berhasil diambil",
@@ -146,9 +122,6 @@ export const getReport = async (req, res) => {
   } catch (error) {
     console.error("Error getLaporan:", error);
 
-    return res.status(500).json({
-      Notifikasi: "Gagal mengambil laporan",
-      error: error.message,
-    });
+    return res.status(500).json({ Notifikasi: "Gagal mengambil laporan", error: error.message });
   }
 };

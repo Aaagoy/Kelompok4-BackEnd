@@ -9,6 +9,7 @@ import router from "./routes/productRoutes.js";
 import orderRouter from "./routes/orderRoute.js";
 import expenseRouter from "./routes/expenseRoute.js";
 import rptRoute from "./routes/rptIORoute.js";
+import { login } from "./controllers/authController.js";
 
 const app = express();
 const PORT = 3000;
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 });
 app.use(express.json());
 app.use("/api/auth", authRouter);
+app.use("/", login);
 app.use("/api/produk", router);
 app.use("/api/kategori", kategoriRouter);
 app.use("/api/order", orderRouter);
