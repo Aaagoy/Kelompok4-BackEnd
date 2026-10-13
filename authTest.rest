@@ -14,11 +14,19 @@ PATCH http://localhost:3000/api/auth/account
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
     "idUser" : 4,
     "nama_user": "admin123",
     "email" : "noval@example.com",
     "password": "admin321",
     "role": "owner"
+=======
+    "idUser" : 3,
+    "nama_user": "Testing User",
+    "email" : "user@example.com",
+    "password": "user123",
+    "role": "pelanggan"
+>>>>>>> bfb871f9446c6009a7fa22a5f1fbb036274e684f
 }
 
 ### DELETE
@@ -26,7 +34,11 @@ DELETE http://localhost:3000/api/auth/account
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
     "idUser" : 4
+=======
+    "idUser" : 0
+>>>>>>> bfb871f9446c6009a7fa22a5f1fbb036274e684f
 }
 
 ### Login
@@ -34,8 +46,13 @@ POST http://localhost:3000/api/auth
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
     "email": "admin@test.com",
     "password": "admin123"
+=======
+    "email": "user@example.com",
+    "password": "user123"
+>>>>>>> bfb871f9446c6009a7fa22a5f1fbb036274e684f
 }
 
 ### PROFILE AND TOKEN TEST IF LOGIN SUCCES IS ACTIVE

@@ -9,7 +9,12 @@ import router from "./routes/productRoutes.js";
 import orderRouter from "./routes/orderRoute.js";
 import expenseRouter from "./routes/expenseRoute.js";
 import rptRoute from "./routes/rptIORoute.js";
+<<<<<<< HEAD
 import { getUsers, loginAdmin } from "./controllers/authController.js";
+=======
+import { login } from "./controllers/authController.js";
+import supplierRoute from "./routes/supplierRoute.js";
+>>>>>>> bfb871f9446c6009a7fa22a5f1fbb036274e684f
 
 const app = express();
 const PORT = 3000;
@@ -24,6 +29,7 @@ app.get("/", (req, res) => {
 });
 app.use(express.json());
 app.use("/api/auth", authRouter);
+<<<<<<< HEAD
 app.use("/users", getUsers);
 app.use("/produk", router);
 app.use("/kategori", kategoriRouter);
@@ -31,6 +37,14 @@ app.use("/order", orderRouter);
 app.use("/expense", expenseRouter());
 app.use("/report", rptRoute());
 app.use("/admin/login", loginAdmin);
+=======
+app.use("/api/produk", router);
+app.use("/api/kategori", kategoriRouter);
+app.use("/api/order", orderRouter);
+app.use("/api/expense", expenseRouter());
+app.use("/api/report", rptRoute());
+app.use("/api/supplier", supplierRoute());
+>>>>>>> bfb871f9446c6009a7fa22a5f1fbb036274e684f
 
 const startServer = async () => {
   try {
