@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 
@@ -14,7 +13,7 @@ const Supplier = db.define(
     },
     nama_supplier: DataTypes.STRING,
     alamat_supplier: DataTypes.STRING,
-    no_telp: DataTypes.STRING.DataTypes,
+    no_telp: DataTypes.STRING,
   },
   {
     freezeTableName: true,
@@ -26,34 +25,3 @@ export default Supplier;
 (async () => {
   await db.sync();
 })();
-=======
-import { DataTypes } from "sequelize";
-import db from "../config/database.js";
-
-const Supplier = db.define("supplier",
-{
-    id_supplier: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-
-    nm_supp:{
-        type: DataTypes.STRING,
-        allowNull:false
-    },
-
-    alt_supp: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
-    no_telpSupp: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-
-},{ freezeTableName:true, timestamps:true });
-
-export default Supplier;
->>>>>>> bfb871f9446c6009a7fa22a5f1fbb036274e684f
