@@ -26,6 +26,11 @@ export async function updateSupplier(req, res){
     if( !nama_supplier|| !alamat_supplier|| !nomor_telepon){
       return res.status(400).json({Notifikasi : "Pastikan semua field terisi !"});
     }
+
+    const cekID = await Supplier.findByPk(req.params.id_supplier);
+    if(!cekID){
+      return res.status(400).json({Notifikasi : "ID Supplier tidak terdaftar"})
+    }
     
     await Supplier.update({
       nm_supp : nama_supplier,
