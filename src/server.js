@@ -10,6 +10,7 @@ import orderRouter from "./routes/orderRoute.js";
 import expenseRouter from "./routes/expenseRoute.js";
 import rptRoute from "./routes/rptIORoute.js";
 import { login } from "./controllers/authController.js";
+import supplierRoute from "./routes/supplierRoute.js";
 
 const app = express();
 const PORT = 3000;
@@ -29,6 +30,7 @@ app.use("/api/kategori", kategoriRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/expense", expenseRouter());
 app.use("/api/report", rptRoute());
+app.use("/api/supplier", supplierRoute());
 
 const startServer = async () => {
   try {

@@ -1,0 +1,28 @@
+### CREATE SUPPLIER
+POST http://localhost:3000/api/supplier/create
+Content-Type: application/json
+
+{
+    "nama_supplier" : "Tomi",
+    "alamat_supplier": "Pekanbaru",
+    "nomor_telepon": "08xxxxxxxx"
+}
+
+### UPDATE SUPPLIER BY ID
+PATCH http://localhost:3000/api/supplier/update/2
+Content-Type: application/json
+
+{
+    "nama_supplier" : "Arvian",
+    "alamat_supplier": "Jambi",
+    "nomor_telepon": "08xxxxxxxx"
+}
+
+### DELETE SUPPLIER BY ID
+DELETE http://localhost:3000/api/supplier/delete/2
+
+### GET ALL SUPPLIER DATA
+GET http://localhost:3000/api/supplier
+
+### GET SUPPLIER DATA BY ID
+GET http://localhost:3000/api/supplier/1
