@@ -1,6 +1,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+const serverError = (res, error) => {
+  console.error(error);
+  return res.status(500).json({ message: "Terjadi kesalahan pada server" });
+};
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -48,40 +52,47 @@ export async function createAccount(req, res) {
 }
 
 export async function updateAccount(req, res) {
-  let { idUser, nama_user, email, password, role } = req.body;
+  // 1. Ambil id dari req.params (sesuai rute /account/:id)
+  const { id } = req.params;
+
+  // 2. Hanya ambil nama_user, email, dan role dari req.body (password diabaikan)
+  const { nama_user, email, role } = req.body;
+
   try {
-    const hashPassword = await bcrypt.hash(password, 10);
+    // 3. Lakukan update ke database menggunakan Sequelize tanpa menyertakan password
     const [idUserCheck] = await User.update(
-      { nama_user, email, password: hashPassword, role },
-      { where: { id_user: idUser } },
+      { nama_user, email, role },
+      { where: { id_user: id } },
     );
+
     if (idUserCheck === 0) {
-      res.status(404).json({ Notifikasi: "Akun tidak ditemukan" });
+      return res.status(404).json({ Notifikasi: "Akun tidak ditemukan" });
     } else {
-      res.status(200).json({ Notifikasi: "Akun diperbarui !" });
+      return res.status(200).json({ Notifikasi: "Akun diperbarui !" });
     }
   } catch (error) {
-    console.log({
-      Notifikasi: "Akun tidak diperbarui, periksa error : ",
-      error,
+    console.error("Akun tidak diperbarui, periksa error :", error);
+    // Kirim respons error ke frontend agar loading berhenti
+    return res.status(500).json({
+      Notifikasi: "Gagal memperbarui akun",
+      error: error.message,
     });
   }
 }
 
-export async function deleteAccount(req, res) {
-  let { idUser } = req.body;
+export const deleteAccount = async (req, res) => {
   try {
-    const idUserCheck = await User.destroy({ where: { id_user: idUser } });
-
-    if (idUserCheck === 0) {
-      res.status(404).json({ Notifikasi: "Akun tidak ditemukan" });
-    } else {
-      res.status(200).json({ Notifikasi: "Akun dihapus !" });
+    const account = await User.findByPk(req.params.id);
+    if (!account) {
+      return res.status(404).json({ msg: "User Tidak ditemukan." });
     }
+    await account.destroy();
+    return res.status(200).json({ msg: "User berhasil dihapus." });
   } catch (error) {
-    console.log({ Notifikasi: "Akun tidak dihapus, periksa error : ", error });
+    return serverError(res, error);
+    // return res.status(res,req);
   }
-}
+};
 
 export async function login(req, res) {
   const { email, password } = req.body || {};

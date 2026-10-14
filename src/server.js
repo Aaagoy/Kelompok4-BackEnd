@@ -30,7 +30,7 @@ app.use("/users", getUsers);
 app.use("/produk", router);
 app.use("/kategori", kategoriRouter);
 app.use("/order", orderRouter);
-app.use("/expense", expenseRouter());
+app.use("/expense", expenseRouter);
 app.use("/report", rptRoute());
 app.use("/admin/login", loginAdmin);
 app.use("/supplier", supplierRouter);

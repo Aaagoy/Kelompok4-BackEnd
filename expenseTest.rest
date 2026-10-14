@@ -13,10 +13,25 @@ Content-Type: application/json
 }
 
 ### GET DATA BY ID 
-GET http://localhost:3000/api/expense/1
+GET http://localhost:3000/expense/1
 
 ### DELETE DATA BY ID
 DELETE http://localhost:3000/api/expense/0
 
 ### GET ALL DATA
-GET http://localhost:3000/api/expense
+GET http://localhost:3000/expense
+
+### Catat Transaksi Pembelian Baru (Restock)
+# Catatan: Pastikan 'id_supplier' sesuai dengan ID yang ada di tabel supplier
+POST http://localhost:3000/expense
+Content-Type: application/json
+
+{
+  "no_invoice": "PO-2026-001",
+  "tanggal": "2026-10-01",
+  "id_supplier": 1,
+  "nama_barang": "Gula Semut Mentah (Bulk)",
+  "jumlah": 50,
+  "total_pengeluaran": 1000000,
+  "status": "Selesai"
+}
