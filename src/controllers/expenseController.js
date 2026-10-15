@@ -126,6 +126,19 @@ export const createExpense = async (req, res) => {
   }
 };
 
+// Di expenseController.js
+export const updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    await Expense.update({ status }, { where: { id_pengeluaran: id } });
+    res.status(200).json({ message: "Status berhasil diperbarui" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // 3. Menghapus Transaksi Pembelian
 export const deleteExpense = async (req, res) => {
   try {
